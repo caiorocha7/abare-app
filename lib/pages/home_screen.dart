@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'criar_conta_escola.dart';
+import 'tela_login.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -19,22 +20,10 @@ class HomeScreen extends StatelessWidget {
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.only(bottom: 60.0),
-                child: Text(
-                  'abaré',
-                  style: TextStyle(
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.teal.shade800,
-                  ),
-                ),
-              ),
-              ElevatedButton(
-                onPressed: () {},
-                child: Text('CRIAR CONTA RESPONSÁVEL'),
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Colors.teal),
-                  foregroundColor: MaterialStateProperty.all(Colors.white),
-                  padding: MaterialStateProperty.all(EdgeInsets.symmetric(horizontal: 30, vertical: 15)),
+                child: 
+                Image.asset(
+                  'assets/images/abare_logo.png',  // Caminho para o asset da imagem
+                  width: 200,  // Define a largura da imagem (opcional)
                 ),
               ),
               SizedBox(height: 10),
@@ -53,7 +42,11 @@ class HomeScreen extends StatelessWidget {
               ),
               SizedBox(height: 10),
               OutlinedButton(
-                onPressed: () {},
+                onPressed: () {
+                    Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => LoginScreen()));
+                },
                 child: Text('ENTRAR'),
                 style: ButtonStyle(
                   side: MaterialStateProperty.all(BorderSide(color: Colors.teal)),
