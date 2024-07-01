@@ -16,7 +16,7 @@ Antes de iniciar, certifique-se de ter o seguinte instalado:
 
 1. Clone o repositório para a sua máquina local usando:
    ```bash
-   git clone https://github.com/caioroch7/abare.git
+   git clone https://github.com/caiorocha7/abare-app.git
 2. Navegue até o diretório do projeto:
    ```bash
    cd abare
