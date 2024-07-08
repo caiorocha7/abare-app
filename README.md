@@ -1,16 +1,31 @@
-# abare
+# Abaré APP
 
-A new Flutter project.
+Este é um projeto Flutter chamado Abaré, que é um aplicativo escolar focado em facilitar a comunicação e o gerenciamento dentro do ambiente escolar para pais com filhos autistas.
 
-## Getting Started
+## Começando
 
-This project is a starting point for a Flutter application.
+Este projeto é um ponto de partida para um aplicativo Flutter. Siga as instruções abaixo para configurar o projeto em sua máquina local.
 
-A few resources to get you started if this is your first Flutter project:
+### Pré-requisitos
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Antes de iniciar, certifique-se de ter o seguinte instalado:
+- Flutter (Veja como instalar [aqui](https://flutter.dev/docs/get-started/install))
+- Android Studio ou VS Code com extensões do Flutter
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Instalação
+
+1. Clone o repositório para a sua máquina local usando:
+   ```bash
+   git clone https://github.com/caiorocha7/abare-app.git
+2. Navegue até o diretório do projeto:
+   ```bash
+   cd abare
+4. Instale as dependências do projeto executando:
+   ```bash
+   flutter pub get
+
+### Execução
+1. Para iniciar o projeto, certifique-se de ter um emulador rodando, ou um dispositivo conectado, e execute:
+   ```bash
+    flutter run
+3. Siga as instruções exibidas no terminal para abrir o aplicativo em um dispositivo ou emulador.
