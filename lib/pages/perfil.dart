@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'chat.dart';
 import 'home_escola.dart';
+import 'tela_login.dart'; // Adicione o import correto para a tela de login.
 
 class PerfilScreen extends StatefulWidget {
   @override
@@ -17,22 +18,31 @@ class _PerfilScreenState extends State<PerfilScreen> {
 
   void _onItemTapped(int index) {
     if (index != _selectedIndex) {
-      if (index == 0) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => TurmaScreen(),
-          ),
-        );
-      } else if (index == 1) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => ChatScreen(),
-          ),
-        );
+      switch (index) {
+        case 0:
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => TurmaScreen()),
+          );
+          break;
+        case 1:
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => ChatScreen()),
+          );
+          break;
+        case 2:
+          break;
       }
     }
+  }
+
+  void _logout() {
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (context) => LoginScreen()),
+      (Route<dynamic> route) => false,
+    );
   }
 
   @override
@@ -59,6 +69,7 @@ class _PerfilScreenState extends State<PerfilScreen> {
       ),
       body: SingleChildScrollView(
         child: Container(
+          height: screenHeight,
           padding: EdgeInsets.symmetric(horizontal: paddingHorizontal, vertical: paddingVertical),
           decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -68,74 +79,32 @@ class _PerfilScreenState extends State<PerfilScreen> {
             ),
           ),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Center(
-                child: GestureDetector(
-                  onTap: () {}, // Placeholder para lógica de edição de foto
+              CircleAvatar(
+                radius: avatarRadius,
+                backgroundImage: AssetImage('assets/images/profile_placeholder.png'),
+                child: Align(
+                  alignment: Alignment.bottomRight,
                   child: CircleAvatar(
-                    radius: avatarRadius,
-                    backgroundImage: AssetImage('assets/images/profile_placeholder.png'), // Placeholder para a foto do perfil
-                    child: Align(
-                      alignment: Alignment.bottomRight,
-                      child: CircleAvatar(
-                        radius: avatarRadius * 0.3,
-                        backgroundColor: Colors.white,
-                        child: Icon(Icons.camera_alt, size: avatarRadius * 0.3, color: Colors.teal.shade800),
-                      ),
-                    ),
+                    radius: avatarRadius * 0.3,
+                    backgroundColor: Colors.white,
+                    child: Icon(Icons.camera_alt, size: avatarRadius * 0.3, color: Colors.teal.shade800),
                   ),
                 ),
               ),
               SizedBox(height: paddingVertical * 0.5),
-              ElevatedButton(
-                onPressed: () {}, // Placeholder para lógica de edição de senha
-                child: Text('Editar senha', style: TextStyle(fontSize: screenWidth * 0.04)),
-                style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.black, backgroundColor: Colors.grey.shade300,
-                  padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.2, vertical: screenHeight * 0.02),
-                ),
-              ),
-              SizedBox(height: paddingVertical * 0.2),
-              ElevatedButton(
-                onPressed: () {}, // Placeholder para lógica de edição de perfil
-                child: Text('Editar', style: TextStyle(fontSize: screenWidth * 0.04)),
-                style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.black, backgroundColor: Colors.grey.shade300,
-                  padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.2, vertical: screenHeight * 0.02),
-                ),
-              ),
-              SizedBox(height: paddingVertical),
-              Container(
-                padding: EdgeInsets.all(screenWidth * 0.05),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _buildProfileInfoRow('Nome', _nomeController.text, screenWidth),
-                    _buildProfileInfoRow('Telefone', _telefoneController.text, screenWidth),
-                    _buildProfileInfoRow('Email', _emailController.text, screenWidth),
-                    _buildProfileInfoRow('CPF', _cpfController.text, screenWidth),
-                  ],
-                ),
-              ),
+              _buildProfileInfoRow('Nome', _nomeController.text, screenWidth),
+              _buildProfileInfoRow('Telefone', _telefoneController.text, screenWidth),
+              _buildProfileInfoRow('Email', _emailController.text, screenWidth),
+              _buildProfileInfoRow('CPF', _cpfController.text, screenWidth),
               SizedBox(height: paddingVertical),
               ElevatedButton(
-                onPressed: () {}, // Placeholder para lógica de logout
+                onPressed: _logout,
                 child: Text('Sair da conta', style: TextStyle(fontSize: screenWidth * 0.04)),
                 style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.black, backgroundColor: Colors.grey.shade300,
-                  padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.2, vertical: screenHeight * 0.02),
-                ),
-              ),
-              SizedBox(height: paddingVertical * 0.2),
-              ElevatedButton(
-                onPressed: () {}, // Placeholder para lógica de exclusão de conta
-                child: Text('Excluir minha conta', style: TextStyle(fontSize: screenWidth * 0.04)),
-                style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.white, backgroundColor: Colors.red.shade300,
+                  foregroundColor: Colors.white,
+                  backgroundColor: Colors.red.shade300,
                   padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.2, vertical: screenHeight * 0.02),
                 ),
               ),

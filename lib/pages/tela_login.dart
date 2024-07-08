@@ -1,7 +1,5 @@
-import 'package:abare/pages/home_escola.dart';
 import 'package:flutter/material.dart';
-
-
+import 'home_escola.dart';
 class LoginScreen extends StatelessWidget {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _senhaController = TextEditingController();
@@ -22,9 +20,9 @@ class LoginScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Image.asset(
-              'assets/images/abare_logo.png', // Caminho para o asset da imagem
-              width: 200, // Define a largura da imagem
-              height: 200, // Define a altura da imagem (opcional)
+              'assets/images/abare_logo.png',
+              width: 200,
+              height: 200,
             ),
             SizedBox(height: 60),
             Text(
@@ -55,9 +53,11 @@ class LoginScreen extends StatelessWidget {
             SizedBox(height: 30),
             ElevatedButton(
               onPressed: () {
-                Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => TurmaScreen()));
+                // Aqui está a mudança para ir diretamente para a TurmaScreen após o login
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => TurmaScreen()),
+                );
               },
               child: Text('ENTRAR'),
               style: ButtonStyle(
