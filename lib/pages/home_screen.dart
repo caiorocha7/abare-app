@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'tela_login.dart';
 
 class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,20 +28,20 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
               
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               OutlinedButton(
                 onPressed: () {
                     Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => LoginScreen()));
                 },
-                child: Text('ENTRAR'),
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Colors.teal),
-                  foregroundColor: MaterialStateProperty.all(Colors.white),
-                  padding: MaterialStateProperty.all(EdgeInsets.symmetric(horizontal: 30, vertical: 15)),
-                  textStyle: MaterialStateProperty.all(TextStyle(fontSize: 20)),
+                  backgroundColor: WidgetStateProperty.all(Colors.teal),
+                  foregroundColor: WidgetStateProperty.all(Colors.white),
+                  padding: WidgetStateProperty.all(const EdgeInsets.symmetric(horizontal: 30, vertical: 15)),
+                  textStyle: WidgetStateProperty.all(const TextStyle(fontSize: 20)),
                 ),
+                child: const Text('ENTRAR'),
               ),
             ],
           ),

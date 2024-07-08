@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class AlunoDetailsScreen extends StatefulWidget {
   final Map<String, dynamic> aluno;
 
-  AlunoDetailsScreen({required this.aluno});
+  const AlunoDetailsScreen({super.key, required this.aluno});
 
   @override
   _AlunoDetailsScreenState createState() => _AlunoDetailsScreenState();
@@ -43,43 +43,43 @@ class _AlunoDetailsScreenState extends State<AlunoDetailsScreen> with SingleTick
   }
 
   void _showAddAtividadeDialog() {
-    final TextEditingController _tituloController = TextEditingController();
-    final TextEditingController _descricaoController = TextEditingController();
-    final TextEditingController _professorController = TextEditingController();
+    final TextEditingController tituloController = TextEditingController();
+    final TextEditingController descricaoController = TextEditingController();
+    final TextEditingController professorController = TextEditingController();
 
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Adicionar Atividade'),
+          title: const Text('Adicionar Atividade'),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               TextField(
-                controller: _tituloController,
-                decoration: InputDecoration(hintText: "Título da Atividade"),
+                controller: tituloController,
+                decoration: const InputDecoration(hintText: "Título da Atividade"),
               ),
               TextField(
-                controller: _descricaoController,
-                decoration: InputDecoration(hintText: "Descrição da Atividade"),
+                controller: descricaoController,
+                decoration: const InputDecoration(hintText: "Descrição da Atividade"),
               ),
               TextField(
-                controller: _professorController,
-                decoration: InputDecoration(hintText: "Nome do Professor"),
+                controller: professorController,
+                decoration: const InputDecoration(hintText: "Nome do Professor"),
               ),
             ],
           ),
           actions: <Widget>[
             ElevatedButton(
-              child: Text('Cancelar'),
+              child: const Text('Cancelar'),
               onPressed: () {
                 Navigator.of(context).pop();
               },
             ),
             ElevatedButton(
-              child: Text('Adicionar'),
+              child: const Text('Adicionar'),
               onPressed: () {
-                _addAtividade(_tituloController.text, _descricaoController.text, _professorController.text);
+                _addAtividade(tituloController.text, descricaoController.text, professorController.text);
                 Navigator.of(context).pop();
               },
             ),
@@ -100,15 +100,15 @@ class _AlunoDetailsScreenState extends State<AlunoDetailsScreen> with SingleTick
             mainAxisSize: MainAxisSize.min,
             children: [
               Text('Descrição: ${atividade['descricao']}'),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Text('Professor: ${atividade['professor']}'),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Text('Data/Hora: ${atividade['dataHora']}'),
             ],
           ),
           actions: <Widget>[
             ElevatedButton(
-              child: Text('Fechar'),
+              child: const Text('Fechar'),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -130,7 +130,7 @@ class _AlunoDetailsScreenState extends State<AlunoDetailsScreen> with SingleTick
           labelColor: Colors.white,  // Cor do texto selecionado
           unselectedLabelColor: Colors.white70,  // Cor do texto não selecionado
           indicatorColor: Colors.white,  // Cor do indicador
-          tabs: [
+          tabs: const [
             Tab(text: 'Informações'),
             Tab(text: 'Diário'),
           ],
@@ -146,8 +146,8 @@ class _AlunoDetailsScreenState extends State<AlunoDetailsScreen> with SingleTick
       floatingActionButton: _tabController.index == 1
           ? FloatingActionButton(
               onPressed: _showAddAtividadeDialog,
-              child: Icon(Icons.add),
               backgroundColor: Colors.teal.shade800,
+              child: const Icon(Icons.add),
             )
           : null,
     );
@@ -155,7 +155,7 @@ class _AlunoDetailsScreenState extends State<AlunoDetailsScreen> with SingleTick
 
   Widget _buildInformacoesTab() {
     return Container(
-      padding: EdgeInsets.all(20),
+      padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topCenter,
@@ -166,13 +166,13 @@ class _AlunoDetailsScreenState extends State<AlunoDetailsScreen> with SingleTick
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Center(
+          const Center(
             child: CircleAvatar(
               radius: 50,
               backgroundImage: AssetImage('assets/images/profile_placeholder.png'), // Placeholder para a foto do aluno
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Text(
             widget.aluno['nome'],
             style: TextStyle(
@@ -181,7 +181,7 @@ class _AlunoDetailsScreenState extends State<AlunoDetailsScreen> with SingleTick
               color: Colors.teal.shade800,
             ),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Text(
             'Resumo: Breve resumo sobre o aluno será exibido aqui.',
             style: TextStyle(
@@ -196,7 +196,7 @@ class _AlunoDetailsScreenState extends State<AlunoDetailsScreen> with SingleTick
 
   Widget _buildDiarioTab() {
     return Container(
-      padding: EdgeInsets.all(20),
+      padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topCenter,
@@ -215,7 +215,7 @@ class _AlunoDetailsScreenState extends State<AlunoDetailsScreen> with SingleTick
                 return GestureDetector(
                   onTap: () => _showDetalhesAtividadeDialog(atividade),
                   child: Card(
-                    margin: EdgeInsets.symmetric(vertical: 10),
+                    margin: const EdgeInsets.symmetric(vertical: 10),
                     child: ListTile(
                       title: Text(atividade['titulo']!),
                     ),

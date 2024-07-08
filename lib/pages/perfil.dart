@@ -4,12 +4,14 @@ import 'home_escola.dart';
 import 'tela_login.dart'; // Adicione o import correto para a tela de login.
 
 class PerfilScreen extends StatefulWidget {
+  const PerfilScreen({super.key});
+
   @override
   _PerfilScreenState createState() => _PerfilScreenState();
 }
 
 class _PerfilScreenState extends State<PerfilScreen> {
-  int _selectedIndex = 2; // Perfil será a terceira aba
+  final int _selectedIndex = 2; // Perfil será a terceira aba
 
   final TextEditingController _nomeController = TextEditingController(text: 'Caio');
   final TextEditingController _telefoneController = TextEditingController(text: '(88) 88888-8888');
@@ -22,13 +24,13 @@ class _PerfilScreenState extends State<PerfilScreen> {
         case 0:
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => TurmaScreen()),
+            MaterialPageRoute(builder: (context) => const TurmaScreen()),
           );
           break;
         case 1:
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => ChatScreen()),
+            MaterialPageRoute(builder: (context) => const ChatScreen()),
           );
           break;
         case 2:
@@ -55,14 +57,14 @@ class _PerfilScreenState extends State<PerfilScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Perfil'),
+        title: const Text('Perfil'),
         backgroundColor: Colors.teal.shade800,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => TurmaScreen()),
+              MaterialPageRoute(builder: (context) => const TurmaScreen()),
             );
           },
         ),
@@ -83,7 +85,7 @@ class _PerfilScreenState extends State<PerfilScreen> {
             children: [
               CircleAvatar(
                 radius: avatarRadius,
-                backgroundImage: AssetImage('assets/images/profile_placeholder.png'),
+                backgroundImage: const AssetImage('assets/images/profile_placeholder.png'),
                 child: Align(
                   alignment: Alignment.bottomRight,
                   child: CircleAvatar(
@@ -101,12 +103,12 @@ class _PerfilScreenState extends State<PerfilScreen> {
               SizedBox(height: paddingVertical),
               ElevatedButton(
                 onPressed: _logout,
-                child: Text('Sair da conta', style: TextStyle(fontSize: screenWidth * 0.04)),
                 style: ElevatedButton.styleFrom(
                   foregroundColor: Colors.white,
                   backgroundColor: Colors.red.shade300,
                   padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.2, vertical: screenHeight * 0.02),
                 ),
+                child: Text('Sair da conta', style: TextStyle(fontSize: screenWidth * 0.04)),
               ),
             ],
           ),

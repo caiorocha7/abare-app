@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import 'tela_login.dart';
 
 class CriarContaEscola extends StatefulWidget {
+  const CriarContaEscola({super.key});
+
   @override
   _CriarContaEscolaState createState() => _CriarContaEscolaState();
 }
@@ -83,12 +85,12 @@ class _CriarContaEscolaState extends State<CriarContaEscola> {
                     print("Cidade: ${_cidadeController.text}");
                     print("Bairro: ${_bairroController.text}");
                   },
-                  child: Text('CRIAR CONTA ESCOLA'),
                   style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(Colors.teal),
-                    foregroundColor: MaterialStateProperty.all(Colors.white),
-                    padding: MaterialStateProperty.all(EdgeInsets.symmetric(horizontal: 30, vertical: 15)),
+                    backgroundColor: WidgetStateProperty.all(Colors.teal),
+                    foregroundColor: WidgetStateProperty.all(Colors.white),
+                    padding: WidgetStateProperty.all(const EdgeInsets.symmetric(horizontal: 30, vertical: 15)),
                   ),
+                  child: const Text('CRIAR CONTA ESCOLA'),
                 ),
               ),
             ],
@@ -105,7 +107,7 @@ class _CriarContaEscolaState extends State<CriarContaEscola> {
         controller: controller,
         decoration: InputDecoration(
           labelText: label,
-          border: OutlineInputBorder(),
+          border: const OutlineInputBorder(),
         ),
       ),
     );
@@ -120,7 +122,7 @@ class _CriarContaEscolaState extends State<CriarContaEscola> {
         inputFormatters: [FilteringTextInputFormatter.digitsOnly],
         decoration: InputDecoration(
           labelText: label,
-          border: OutlineInputBorder(),
+          border: const OutlineInputBorder(),
         ),
       ),
     );
@@ -134,7 +136,7 @@ class _CriarContaEscolaState extends State<CriarContaEscola> {
         keyboardType: TextInputType.emailAddress,
         decoration: InputDecoration(
           labelText: label,
-          border: OutlineInputBorder(),
+          border: const OutlineInputBorder(),
         ),
       ),
     );
@@ -148,7 +150,7 @@ class _CriarContaEscolaState extends State<CriarContaEscola> {
         obscureText: true,
         decoration: InputDecoration(
           labelText: label,
-          border: OutlineInputBorder(),
+          border: const OutlineInputBorder(),
         ),
       ),
     );

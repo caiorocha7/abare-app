@@ -2,6 +2,8 @@ import 'package:abare/pages/home_escola.dart';
 import 'package:flutter/material.dart';
 
 class ChatScreen extends StatefulWidget {
+  const ChatScreen({super.key});
+
   @override
   _ChatScreenState createState() => _ChatScreenState();
 }
@@ -50,8 +52,8 @@ class _ChatScreenState extends State<ChatScreen> {
       child: GestureDetector(
         onTap: message['option'] != null ? () => _selectOption(message['option']!) : null,
         child: Container(
-          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 14),
-          margin: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 14),
+          margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
           decoration: BoxDecoration(
             color: isUser ? Colors.teal.shade800 : (message['option'] != null ? Colors.blue.shade100 : Colors.grey.shade300),
             borderRadius: BorderRadius.circular(10),
@@ -67,7 +69,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   color: isUser ? Colors.white : Colors.black,
                 ),
               ),
-              SizedBox(height: 5),
+              const SizedBox(height: 5),
               Text(
                 message['text']!,
                 style: TextStyle(
@@ -102,14 +104,14 @@ class _ChatScreenState extends State<ChatScreen> {
               Expanded(
                 child: TextField(
                   controller: _controller,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     hintText: 'Digite sua mensagem...',
                     border: OutlineInputBorder(),
                   ),
                 ),
               ),
               IconButton(
-                icon: Icon(Icons.send),
+                icon: const Icon(Icons.send),
                 onPressed: _sendMessage,
               ),
             ],
@@ -126,12 +128,12 @@ class _ChatScreenState extends State<ChatScreen> {
         title: Text(_selectedOption.isEmpty ? 'Chat' : _selectedOption),
         backgroundColor: Colors.teal.shade800,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
             if (_selectedOption.isEmpty) {
               Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => TurmaScreen()),
+                MaterialPageRoute(builder: (context) => const TurmaScreen()),
               );
             } else {
               setState(() {

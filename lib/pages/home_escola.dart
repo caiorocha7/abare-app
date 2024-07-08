@@ -4,12 +4,14 @@ import 'package:flutter/material.dart';
 import 'detalhes_aluno.dart';
 
 class TurmaScreen extends StatefulWidget {
+  const TurmaScreen({super.key});
+
   @override
   _TurmaScreenState createState() => _TurmaScreenState();
 }
 
 class _TurmaScreenState extends State<TurmaScreen> {
-  int _selectedIndex = 0;  // Home será a primeira aba
+  final int _selectedIndex = 0;  // Home será a primeira aba
 
   List<Map<String, dynamic>> turmas = [
     {
@@ -41,14 +43,14 @@ class _TurmaScreenState extends State<TurmaScreen> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => ChatScreen(),
+            builder: (context) => const ChatScreen(),
           ),
         );
       } else if (index == 2) {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => PerfilScreen(),
+            builder: (context) => const PerfilScreen(),
           ),
         );
       }
@@ -75,7 +77,7 @@ class _TurmaScreenState extends State<TurmaScreen> {
         backgroundColor: Colors.teal.shade800,
       ),
       body: Container(
-        padding: EdgeInsets.symmetric(horizontal: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
@@ -88,7 +90,7 @@ class _TurmaScreenState extends State<TurmaScreen> {
             Expanded(
               child: SingleChildScrollView(
                 child: Padding(
-                  padding: EdgeInsets.only(top: 20),
+                  padding: const EdgeInsets.only(top: 20),
                   child: ExpansionPanelList(
                     expansionCallback: (int index, bool isExpanded) {
                       setState(() {
@@ -109,7 +111,7 @@ class _TurmaScreenState extends State<TurmaScreen> {
                               title: Text('Nome: ${aluno['nome']}'),
                               subtitle: Text('Idade: ${aluno['idade']}'),
                               trailing: IconButton(
-                                icon: Icon(Icons.photo),
+                                icon: const Icon(Icons.photo),
                                 onPressed: () {},
                               ),
                               onTap: () {

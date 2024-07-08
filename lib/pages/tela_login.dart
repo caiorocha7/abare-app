@@ -1,14 +1,62 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'home_escola.dart';
-class LoginScreen extends StatelessWidget {
+import 'home_screen.dart';
+
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
+
+  @override
+  _LoginScreenState createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _senhaController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  String _responseMessage = '';
+
+  Future<void> _login() async {
+    final response = await http.post(
+      Uri.parse('http://195.200.0.244:8082/user/authenticate'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, String>{
+        'email': _emailController.text,
+        'password': _passwordController.text,
+      }),
+    );
+    if (response.statusCode == 202) {
+      final responseBody = jsonDecode(response.body);
+      setState(() {
+        _responseMessage = 'Successfully logged in with Access Type: ${responseBody['access_type']}, User ID: ${responseBody['user_id']}';
+      });
+      if (responseBody['access_type'] == 2) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const TurmaScreen()),
+        );
+      }
+      else {
+        _responseMessage = 'Page not implemented yet. Contact the system administrator.';
+        //Navigator.pushReplacement(
+        //  context,
+        //  MaterialPageRoute(builder: (context) => const TurmaScreen()),
+        //);
+      }
+    } else {
+      setState(() {
+        _responseMessage = 'Failed to log in. Please check your credentials or system status.';
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: EdgeInsets.symmetric(horizontal: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
@@ -24,7 +72,7 @@ class LoginScreen extends StatelessWidget {
               width: 200,
               height: 200,
             ),
-            SizedBox(height: 60),
+            const SizedBox(height: 60),
             Text(
               'ENTRAR',
               style: TextStyle(
@@ -33,39 +81,35 @@ class LoginScreen extends StatelessWidget {
                 color: Colors.teal.shade800,
               ),
             ),
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
             TextField(
               controller: _emailController,
-              decoration: InputDecoration(
-                labelText: 'EMAIL',
+              decoration: const InputDecoration(
+                labelText: 'E-mail',
                 border: OutlineInputBorder(),
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             TextField(
-              controller: _senhaController,
-              decoration: InputDecoration(
-                labelText: 'SENHA',
+              controller: _passwordController,
+              decoration: const InputDecoration(
+                labelText: 'Senha',
                 border: OutlineInputBorder(),
               ),
               obscureText: true,
             ),
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
             ElevatedButton(
-              onPressed: () {
-                // Aqui está a mudança para ir diretamente para a TurmaScreen após o login
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => TurmaScreen()),
-                );
-              },
-              child: Text('ENTRAR'),
+              onPressed: _login,
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all(Colors.teal),
                 foregroundColor: MaterialStateProperty.all(Colors.white),
-                padding: MaterialStateProperty.all(EdgeInsets.symmetric(horizontal: 50, vertical: 20)),
+                padding: MaterialStateProperty.all(const EdgeInsets.symmetric(horizontal: 50, vertical: 20)),
               ),
+              child: const Text('ENTRAR'),
             ),
+            const SizedBox(height: 20),
+            Text(_responseMessage),
           ],
         ),
       ),
