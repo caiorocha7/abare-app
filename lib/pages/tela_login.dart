@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'home_escola.dart';
 import 'home_screen.dart';
 
@@ -16,38 +15,28 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _passwordController = TextEditingController();
   String _responseMessage = '';
 
-  Future<void> _login() async {
-    final response = await http.post(
-      Uri.parse('http://195.200.0.244:8082/user/authenticate'),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-      body: jsonEncode(<String, String>{
-        'email': _emailController.text,
-        'password': _passwordController.text,
-      }),
-    );
-    if (response.statusCode == 202) {
-      final responseBody = jsonDecode(response.body);
+  // Mocked user credentials
+  final String _mockEmail = "abare@abare.com";
+  final String _mockPassword = "12345678";
+
+  // Function to simulate login
+  void _login() {
+    String email = _emailController.text;
+    String password = _passwordController.text;
+
+    if (email == _mockEmail && password == _mockPassword) {
       setState(() {
-        _responseMessage = 'Successfully logged in with Access Type: ${responseBody['access_type']}, User ID: ${responseBody['user_id']}';
+        _responseMessage = 'Login bem-sucedido!';
       });
-      if (responseBody['access_type'] == 2) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => const TurmaScreen()),
-        );
-      }
-      else {
-        _responseMessage = 'Page not implemented yet. Contact the system administrator.';
-        //Navigator.pushReplacement(
-        //  context,
-        //  MaterialPageRoute(builder: (context) => const TurmaScreen()),
-        //);
-      }
+
+      // Simulando o direcionamento para a tela "TurmaScreen" após login bem-sucedido.
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const TurmaScreen()),
+      );
     } else {
       setState(() {
-        _responseMessage = 'Failed to log in. Please check your credentials or system status.';
+        _responseMessage = 'Falha no login. Verifique suas credenciais.';
       });
     }
   }
@@ -104,12 +93,20 @@ class _LoginScreenState extends State<LoginScreen> {
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all(Colors.teal),
                 foregroundColor: MaterialStateProperty.all(Colors.white),
-                padding: MaterialStateProperty.all(const EdgeInsets.symmetric(horizontal: 50, vertical: 20)),
+                padding: MaterialStateProperty.all(
+                    const EdgeInsets.symmetric(horizontal: 50, vertical: 20)),
               ),
               child: const Text('ENTRAR'),
             ),
             const SizedBox(height: 20),
-            Text(_responseMessage),
+            Text(
+              _responseMessage,
+              style: TextStyle(
+                color: _responseMessage.contains('bem-sucedido')
+                    ? Colors.green
+                    : Colors.red,
+              ),
+            ),
           ],
         ),
       ),
